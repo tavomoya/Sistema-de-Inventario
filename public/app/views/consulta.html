@@ -1,0 +1,98 @@
+<div class="page-header">
+	<h1 class="animated fadeInRight">Consultas</h1>
+</div>
+<div class="rows">
+	<div class="col-xs-12">
+		<nav class="navbar" role="navigation">
+			<table class="table no-border-top no-margin-bottom">
+				<td class="danger">Criterio
+					<select ng-model="criterio" ng-change="selectCriteria(criterio)">
+						<option value="articulo">Articulos</option>
+						<option value="almacen">Almacenes</option>
+						<option value="existencia">Existencia x Almacen</option>
+					</select>
+				</td>
+				<td class="danger">Fecha Desde
+					<input type="date" disabled>
+				</td>
+				<td class="danger">Fecha Hasta
+					<input type="date" disabled>
+				</td>
+				<td ng-if="isArticulo" class="danger">Tipo de Inventario
+					<select ng-model="inventario" ng-change="selectedInv(inventario.Descripcion)" ng-options="inventario as inventario.Descripcion for inventario in inventarios track by inventario.Descripcion">
+					</select>
+				</td>
+				<td ng-if="isAlmacen" class="danger">Estado del Almacen
+					<select ng-model="estatus" ng-change="selectEstado(estatus)">
+						<option value="Disponible">Disponible</option>
+						<option value="No Disponible">No Disponible</option>
+					</select>
+				</td>
+				<td ng-if="isExistencia" class="danger">Articulos
+					<select ng-model="articulo" ng-change="selectedArt(articulo.Descripcion)" ng-options="articulo as articulo.Descripcion for articulo in articulos track by articulo.Descripcion">
+					</select>
+				</td>
+			</table>
+		</nav>
+	</div>
+</div>
+
+
+<!-- Tabla Para Articulos -->
+<div ng-if="isArticulo">
+	<table class="table table-striped">
+		<tr class="mantenimiento-header">
+			<th ng-click="filtrarPor='Descripcion';reverse=!reverse">Descripci&oacute;n</th>
+			<th ng-click="filtrarPor='existencia';reverse=!reverse">Existencia</th>
+			<th ng-click="filtrarPor='tipoInventario';reverse=!reverse">Tipo de Inventario</th>
+			<th ng-click="filtrarPor='costo';reverse=!reverse">Costo Unitario</th>
+			<th ng-click="filtrarPor='estado';reverse=!reverse">Estado</th>
+		</tr>
+		<tr ng-repeat="a in articulos">
+			<td>{{a.Descripcion}}</td>
+			<td>{{a.existencia}}</td>
+			<td>{{a.tipoInventario.Descripcion}}</td>
+			<td>{{a.costo}}</td>
+			<td>{{a.estado}}</td>
+		</tr>
+	</table>
+</div>
+
+<!-- Tabla Para Los Almacenes -->
+<div ng-if="isAlmacen">
+	<table class="table table-striped">
+		<tr class="mantenimiento-header">
+			<th ng-click="filtrarPor='Descripcion';reverse=!reverse">Descripci&oacute;n</th>
+			<th ng-click="filtrarPor='estado';reverse=!reverse">Estado</th>
+		</tr>
+		<tr ng-repeat="alm in almacenes">
+			<td>{{alm.Descripcion}}</td>
+			<td>{{alm.estado}}</td>
+		</tr>
+	</table>
+</div>
+
+<!-- Tabla Para las Exstencia por Almacen -->
+
+<div ng-if="isExistencia">
+	<table class="table table-striped">
+		<tr class="mantenimiento-header">
+			<th ng-click="filtrarPor='almacen';reverse=!reverse">Almac&eacute;n</th>
+			<th ng-click="filtrarPor='articulo';reverse=!reverse">Articulo</th>
+			<th ng-click="filtrarPor='cantidad';reverse=!reverse">Cantidad</th>
+		</tr>
+		<tr ng-repeat="e in existencias">
+			<td>{{e.almacen.Descripcion}}</td>
+			<td>{{e.articulo.Descripcion}}</td>
+			<td>{{e.cantidad}}</td>
+		</tr>
+	</table>
+</div>
+
+<div class="col-sm-2 col-sm-offset-10">
+	<br>
+	<br>
+	<div class="input-group-sm">
+
+	</div>
+</div>

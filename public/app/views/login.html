@@ -1,0 +1,23 @@
+   <div style="margin: 0 auto; min-width: 20%; max-width: 30%; margin-bottom: 20px;" ng-show="!isAuthenticated">
+      <h1 class="navbar-brand" style="float: none; margin: 40px 0; font-size: 6vmax; text-align: center;">Inventario</h1>
+      <div class="text-danger well" ng-show="message" style="text-align:center">{{message}}</div>
+      <form role="form">
+        <div class="form-group">
+          <div class="input-group" style="width: 100%">
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+            <input ng-model="username" type="text" class="form-control" placeholder="Usuario"><br>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group" style="width: 100%" >
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input ng-model="password" type="password" class="form-control" placeholder="Contrasena"><br>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%" ng-click="logIn()"> Entrar </button><br>
+      </form>
+     <style type="text/css">
+      .sidebar {display: none}
+     </style>
+  </div>
+</div>

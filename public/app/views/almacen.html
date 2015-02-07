@@ -1,0 +1,76 @@
+<div class="page-header">
+	<h1 class="animated fadeInRight">Almacenes</h1>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<nav class="navbar" role="navigation">
+			<div class="input-group">
+				<input class="form-control" ng-model="filtro.$" type="text"></input>
+				<span class="input-group-addon"><i class="fa fa-search"></i></span>
+			</div>
+		</nav>
+	</div>
+</div>
+<form name="articulosForm" angular-validator-submit="addArticulo()" novalidate angular-validator>
+	<table class="table no-border-top no-margin-bottom">
+		<tr class="mantenimiento-header">
+			<th class="col-sm-1"></th>
+			<th ng-click="filtrarPor='Descripcion';reverse=!reverse">Descripci&oacute;n</th>
+			<th ng-click="filtrarPor='estado';reverse=!reverse">Estado</th>
+			<th></th>
+		</tr>
+		<tr class="mantenimiento-header">
+			<td></td>
+			<td>
+				<input type="text" ng-model="newDescripcion" name="ndescripcion" placeholder="Descripci&oacute;n" class="form-control" ng-pattern="/^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/" required>
+			</td>
+			<td>
+				<select ng-model="newEstado" name="estado" class="form-control" required>
+					<option value="Disponible">Disponible</option>
+					<option value="No Disponible">No Disponible</option>
+				</select>
+				<!-- <input type="text" name="norden" ng-model="newEstado" placeholder="Estado" class="form-control" required> -->
+			</td>
+			<td>
+				<button type="submit" class="btn btn-sm btn-success">
+					<span> <i class="fa fa-check"></i></span>
+				</button>
+			</td>
+		</tr>
+	</table>
+	<table class="table table-striped">
+		<tr ng-repeat="almacen in listaAlmacen | filter: filtro | orderBy:filtrarPor:reverse" ng-class="isEdited(almacen.edited)" ng-click="edit(almacen)">
+			<td class="col-xs-1">
+				<button class="btn btn-xs btn-danger" ng-show="!almacen.edited" ng-click="borrarAlmacen(almacen);$event.stopPropagation()">
+					<span> <i class="fa fa-times"></i></span>
+				</button>
+				<button class="btn btn-sm btn-warning" ng-show="almacen.edited" ng-click="cancelUpdate(almacen);$event.stopPropagation()">Cancelar</button>
+			</td>			
+			<td class="col-xs-6 p-left">
+				<span ng-show="almacen.saved && !almacen.edited">{{almacen.Descripcion}}</span>
+				<div ng-show="!almacen.saved || almacen.edited" class="input-group">
+					<input type="text" ng-model="almacen.Descripcion" class="form-control" required>
+				</div>
+			</td>
+			<td class="col-xs-5 p-right">
+				<span ng-show="almacen.saved && !almacen.edited">{{almacen.estado}}</span>
+				<div ng-show="!almacen.saved || almacen.edited" class="input-group">
+					<input type="text" ng-model="almacen.estado" class="form-control" required>
+				</div>
+			</td>
+			<td>
+				<button class="btn btn-sm btn-success center-element" ng-show="almacen.edited" ng-click="actualizarAlmacen(almacen); text = !text">
+					<span> <i class="fa fa-check"></i></span>
+				</button>
+			</td>
+
+		</tr>
+	</table>
+</form>
+<div class="col-sm-2 col-sm-offset-10">
+	<br>
+	<br>
+	<div class="input-group-sm">
+
+	</div>
+</div>

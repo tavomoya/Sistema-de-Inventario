@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: public/app/scripts/controllers/util.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: public/app/scripts/controllers/util.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* @author Carlos Gonzalez &lt;cgonzalez@simetricaconsulting.com>
+* @copyright 2014 Simetrica Consulting. Todos los derechos reservados.
+*/
+/**
+* @namespace angular
+*/
+'use strict';
+/**
+* @class angular.symdevsApp
+* @memberOf angular    
+*/
+var app = angular.module('symdevsApp');
+
+/**
+* @class angular.symdevsApp.AlertCtrl
+*/
+app.controller('AlertCtrl', function ($scope,$rootScope, $timeout) {
+	//Definicion de variables publicas
+	$scope.alerts = [];	//Variable publica que tiene todos los mensajes de alerta
+	
+	//Definicion de funciones privadas
+	/**
+	* @name addAlert
+	* @function addAlert
+	* @memberOf angular.symdevsApp.AlertCtrl
+	* @param {string} type - Tipo de alerta que es.
+	* @param {string} message - Mensaje que tendra la alerta.
+	* @param {int} time - Tiempo de duracion en ms.
+	* @description Funcion privada que añade una alerta.
+	*/	
+	var addAlert = function(type, message, time) {
+		$scope.alerts.push({type: type, msg: message});
+		$timeout(function(){
+			$scope.closeAlert();
+		},time);
+	};
+	//Definicion de funciones publicas
+	/**
+	* @name $scope.closeAlert
+	* @function closeAlert
+	* @memberOf angular.symdevsApp.AlertCtrl
+	* @description Funcion publica que cierra la primera alerta puesta.
+	*/	
+	$scope.closeAlert = function() {
+		$scope.alerts.shift();
+	};	
+	/**
+	* @name $scope.showMessage
+	* @function showMessage
+	* @memberOf angular.symdevsApp.AlertCtrl
+	* @param {string} errorOrSuccess - Tipo de mensaje que es:
+	* 0 &lt;--- danger
+	* 1 &lt;--- success
+	* 2 &lt;--- warning
+	* 3 &lt;--- info
+	* @param {string} msg - Mensaje que tendra el error.
+	* @param {int} time - Tiempo de duracion en ms.
+	* @description Funcion global que muestra un mensaje o alerta dado. Parametros de entrada: Error.
+	*/		
+	$rootScope.showMessage = function(errorOrSuccess, msg, time){
+		var time = (typeof time == 'number') ? parseInt(time) : 6000;
+		var typeOfMessage;
+		switch (errorOrSuccess) {
+			case 0 :
+				typeOfMessage = 'danger';
+				break;
+			case 1 :
+				typeOfMessage = 'success';
+				break;
+			case 2 :
+				typeOfMessage = 'warning';
+				break;
+			case 3 :
+				typeOfMessage = 'info';
+				break;
+			default :
+				typeOfMessage = 'info';
+				break;
+		}
+		addAlert(typeOfMessage, msg, time);
+	}; 	
+});
+/**
+* @class angular.symdevsApp.ModalCtrl
+*/ 
+app.controller('ModalCtrl', function ($modal, $rootScope) {
+	//Definicion de funciones privadas
+	/**
+	* @name open
+	* @function open
+	* @memberOf angular.symdevsApp.ModalCtrl
+	* @param {string} title - Titulo que tiene el modal.
+	* @param {string} content - Mensaje que tiene el modal.
+	* @param {function} funcOk - Callback al hacer click en Ok.
+	* @param {function} funcCancel - Callback al hacer click en Cancelar.
+	* @description Funcion privada que inicializa un modal con los parametros dados.
+	*/		
+	var open = function (title, content, funcOk, funcCancel) {
+		var modalInstance = $modal.open({
+			templateUrl: 'myModalContent.html',
+			controller: ModalInstanceCtrl,
+			size: 'sm',
+            backdrop: 'static',
+            keyboard: false,
+			resolve: {
+				params : function () {
+					return {
+						title: title,
+						content: content,
+						funcOk : funcOk,
+                        funcCancel: (typeof(funcCancel) != 'undefined') ? funcCancel : function () {}
+					}	
+				}
+			}
+		});
+	}
+	//Controlador interno para abrir un modal
+	var ModalInstanceCtrl = function ($scope, $modalInstance, params) {
+		$scope.title = params.title;
+		$scope.content = params.content;
+		$scope.ok = function () {
+			params.funcOk();
+			$modalInstance.close();
+		};
+	//Definicion de funciones publicas
+	/**
+	* @name $scope.cancel
+	* @function cancel
+	* @memberOf angular.symdevsApp.ModalCtrl
+	* @description Funcion privada que cancela y cierra el modal.
+	*/		
+	$scope.cancel = function () {
+            params.funcCancel();
+			$modalInstance.dismiss('cancel');
+		};
+	};
+	/**
+	* @name $rootScope.showModal
+	* @function showModal
+	* @memberOf angular.symdevsApp.ModalCtrl
+	* @param {string} title - Titulo que tiene el modal.
+	* @param {string} content - Mensaje que tiene el modal.
+	* @param {function} funcOk - Callback al hacer click en Ok.
+	* @param {function} funcCancel - Callback al hacer click en Cancelar.	
+	* @description Funcion publica que muestra el modal dependiendo de los parametros dados.
+	*/		
+	$rootScope.showModal = function (title, content, funcOk, funcCancel) {
+		open(title, content, funcOk, funcCancel);
+	}
+});
+
+/**
+* @class angular.symdevsApp.SessionCtrl
+*/  
+app.controller('SessionCtrl', function ($scope, $rootScope, $timeout, $location,$window, $http) {
+	//Definicion de objeto para conectarse a los web services en general
+	/**
+	* @class angular.symdevsApp.SessionCtrl.objectCRUD
+	* @param {string} tabla - Nombre de la coleccion que se desea hacer el crud
+	* @memberOf angular.symdevsApp.SessionCtrl  
+	*/
+	$rootSccope.objectCRUD = function(tabla) {
+		this.tabla = tabla;
+	};
+	$rootSccope.objectCRUD.prototype = {
+		/**
+		* @function get
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {funcion} callback - Funcion que llama al terminar el proceso.
+		* @description Funcion que trae todos los objetos de una coleccion.
+		*/	
+		get: function(callback){
+			$http.post('/api/mantenimiento/search', { tabla: this.tabla, obj:{}}).success( function(data, status){
+				callback(data);
+			});
+		},
+		/**
+		* @function getByParams
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} params - Parametros de entrada o query.
+		* @param {funcion} callback - Funcion que llama al terminar el proceso cuando es correcto.
+		* @param {funcion} callbackFail - Funcion que llama al terminar el proceso cuando falla.
+		* @description Funcion que busca los objetos de una coleccion basados en parametros de entrada.
+		*/			
+		getByParams: function(params, callback, callbackFail){
+			console.log("-----------DATA");
+			$http.post('/api/mantenimiento/search', { tabla: this.tabla, obj: params}).success( function(data, status){
+				console.log('SUCCESS');
+				console.log(status);
+				console.log(data);
+				callback(data);
+			})
+			.error(function(data, status){
+				console.log('FAIL');
+				console.log(status);
+				callbackFail(data);
+			});
+		},
+		/**
+		* @function getPaginatedSearch
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} params - Parametros de paginacion.
+		* @param {funcion} callback - Funcion que llama al terminar el proceso.
+		* @description Funcion que busca los objetos de una coleccion basados en parametros de entrada y de paginacion.
+		*/				
+		getPaginatedSearch: function(params, callback){
+			$http.post('/api/mantenimiento/paginatedSearch',  { 
+				filter: params.filter,
+				limit: params.limit, 
+				skip: params.skip, 
+				sort: params.sort,
+				search: params.search,
+				user: $rootScope.userData,
+				tabla: this.tabla,
+				fields: params.fields
+			})
+			.success(function (data, status, header, config) {        
+				callback(data);
+			});
+		},
+		/**
+		* @function getPaginatedSearch
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} filter - Parametros de entrada para filtrar el conteo.
+		* @param {funcion} callback - Funcion que llama al terminar el proceso.
+		* @description Funcion que busca el total de objetos basados en un filtro.
+		*/			
+		count: function(filter, callback){
+			$http.post('/api/mantenimiento/count', {
+				tabla: this.tabla,
+				obj: filter
+			})
+			.success(function(data, status){
+				callback(data);
+			});
+		},
+		/**
+		* @function insert
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} objeto - Objeto a insertar
+		* @param {funcion} callback - Funcion que llama al terminar el proceso
+		* @description Funcion que inserta un objeto a una coleccion
+		*/			
+		insert: function(objeto, callback){
+			$http.post('/api/mantenimiento/new', { tabla: this.tabla, obj: objeto }).success( function(data, status){
+				callback(data);
+			});
+		},
+		/**
+		* @function update
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} query - Query para poder actualizar el objeto
+		* @param {object} objeto - Objeto a actualizar
+		* @param {funcion} callback - Funcion que llama al terminar el proceso
+		* @description Funcion que actualiza un objeto de una coleccion basado en un query
+		*/			
+		update: function(query,objeto, callback){
+			$http.post('/api/mantenimiento/update', { tabla: this.tabla, query: query, obj: objeto }).success( function(data, status){
+				callback(data);
+			});
+		},	
+		/**
+		* @function delete
+		* @memberOf angular.symdevsApp.SessionCtrl.objectCRUD
+		* @param {object} objeto - Objeto a remover
+		* @param {funcion} callback - Funcion que llama al terminar el proceso
+		* @description Funcion que remueve un objeto de una coleccion
+		*/			
+		delete: function(objeto, callback){
+			$http.post('/api/mantenimiento/delete', { tabla: this.tabla, query: query, obj: objeto }).success( function(data, status){
+				callback(data);
+			});
+		}
+	};
+	//Definicion de funciones publicas
+	/**
+	* @name $rootScope.mostrarLasVistas
+	* @function mostrarLasVistas
+	* @memberOf angular.symdevsApp.SessionCtrl
+	* @description Funcion global que maneja la vistas que se pueden ver segun el tipo de usuario dado.
+	*/		
+	$rootScope.mostrarLasVistas = function() {
+		if($rootScope.isAuthenticated){
+			$rootScope.mostrarVista = { 
+				nuevoReclamo: $rootScope.isAuthenticated, 
+				reclamos: $rootScope.isAuthenticated,
+				reportes: ($rootScope.userData.tipo != "Usuario" &amp;&amp; $rootScope.isAuthenticated)? true: false,
+				perfil: ($rootScope.userData.tipo &amp;&amp;  $rootScope.isAuthenticated &amp;&amp; ($rootScope.userData.tipo == "Proveedor" || $rootScope.userData.tipo == "Administrador"))? true: false,
+			};
+			$window.sessionStorage.mostrarVista = JSON.stringify($rootScope.mostrarVista);
+		}
+		else{
+			if($rootScope.isAuthenticated == false){
+				$rootScope.mostrarVista = { 
+					nuevoReclamo: false, //Vista de nuevo Reclamo
+					reclamos: false, //Vista de reclamos
+					reportes: false, //Vista de reportes
+					perfil: false //Vista de perfil
+				};
+				$window.sessionStorage.mostrarVista = JSON.stringify($rootScope.mostrarVista);
+			}
+			else{
+				$rootScope.mostrarVista = JSON.parse($window.sessionStorage.mostrarVista);
+			}
+		}
+	};
+	/**
+	* @name $rootScope.logout
+	* @function logout
+	* @memberOf angular.symdevsApp.SessionCtrl
+	* @description Funcion global que desloggea al usuario
+	*/			
+	$rootScope.logout = function () {
+		$rootScope.isAuthenticated = false;
+		$rootScope.mostrarLasVistas();
+		$window.sessionStorage.token = null;
+		$window.sessionStorage.user = null;
+		$window.sessionStorage.isAuthenticated = null;
+		$rootScope.isAuthenticated = null;
+		$scope.message = "";
+		$scope.wellcome = "";
+		$location.path('/login'); 
+	}
+	/**
+	* @name $rootScope.getListas
+	* @function getListas
+	* @memberOf angular.symdevsApp.SessionCtrl
+	* @description Funcion global que trae las listas dadas en la base de datos
+	*/	
+	$rootScope.getListas = function(listas, callback){
+		$http.post('/api/mantenimiento/lista', { listas: listas }).success( function(data, status){
+			callback(data);
+		});
+	};		
+	//Codigo implementado
+	if(!$window.sessionStorage.isAuthenticated &amp;&amp; ($location.path() != '/register' &amp;&amp; $location.path().substr(0,15) != "/changepassword")) {
+		$location.path('/login');
+	} else if($location.path() != '/register' &amp;&amp; $rootScope.userData == undefined &amp;&amp; $rootScope.proveedorData == undefined) {
+		var userData = JSON.parse($window.sessionStorage.user);
+		$http.post('/api/mantenimiento/buscarPorId', { tabla: "users", query:{usuarioId: userData.usuarioId}}).success( function(data, status){
+			$rootScope.userData = data;
+			$rootScope.isAuthenticated = true;
+		});
+	}
+	$rootScope.$on("$routeChangeStart", function () {
+		console.log("URL: ", $location.path());
+		if(!$window.sessionStorage.isAuthenticated &amp;&amp; ($location.path() != '/register' &amp;&amp; $location.path().substr(0,15) != "/changepassword")) {
+			$location.path('/login');
+		}
+		if($window.sessionStorage.isAuthenticated &amp;&amp; $location.path() == '/register') {
+			$location.path('/main');
+		}
+	});
+	if($window.sessionStorage.mostrarVista)
+		$rootScope.mostrarLasVistas();	
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="angular.symdevsApp.html">symdevsApp</a></li><li><a href="angular.symdevsApp.AlertCtrl.html">AlertCtrl</a></li><li><a href="angular.symdevsApp.ModalCtrl.html">ModalCtrl</a></li><li><a href="angular.symdevsApp.SessionCtrl.html">SessionCtrl</a></li><li><a href="angular.symdevsApp.SessionCtrl.objectCRUD.html">objectCRUD</a></li><li><a href="nodejs.soapClient.html">soapClient</a></li></ul><h3>Namespaces</h3><ul><li><a href="angular.html">angular</a></li><li><a href="nodejs.html">nodejs</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Aug 13 2014 20:10:30 GMT-0400 (Hora estándar oeste, Sudamérica)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

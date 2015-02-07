@@ -1,0 +1,41 @@
+<div class='container'>
+
+	<h1><span class='label label-default' ng-model='usuario'>{{usuario}}</span></h1>	
+	</br>
+	<button class='btn btn-info' ng-click='changePassword()' ng-hide='imPressed'>Change Password</button>
+	<br>
+
+	<!-- Changing the password -->
+	<div class='panel panel-warning' ng-show='imPressed'>
+		<div class='panel panel-heading'>Change Password</div>
+
+		<div class='input-group input-group-lg'>
+		<input type="password" ng-model="oldPassword" id="oldPass" placeholder='Old Password' required>
+		</div>
+		<div class='input-group input-group-lg'>
+		<input type="password" ng-model="newPassword" id="newPass" placeholder='New Password' required>
+		</div>
+		<div class='input-group input-group-lg'>
+		<input type="password" ng-model="reNew" id="retype" placeholder='Retype the new One' required>
+		</div>
+
+		<div class='input-group'>
+		<button class='btn btn-primary' type="submit" ng-click='submitChange()'>Commit Changes</button>
+		</div>
+
+	</div>
+
+
+	<!-- Panel that shows the tweets of this user -->
+	<div class='panel panel-primary' ng-hide="imPressed">
+		<div class='panel panel-heading'>Ur Twitts B)</div>
+		
+		<p class="input-group" ng-repeat="tweet in myTweets | orderBy: 'date': true">
+	        <label class="control-label">@{{tweet.author}}</label> </br>
+	        <span style="color:#2c3e50; font-weight:bolder" class='glyphicon glyphicon-comment'>{{tweet.message}}</span></br>
+	        {{tweet.date}}
+    	</p>
+		<div class='panel panel-footer'>This is the end :/</div>
+	</div>
+
+</div>

@@ -1,0 +1,22 @@
+<h1 class="animated fadeInRight">Reportes</h1>
+<hr>
+<div class="row">
+	<div class="col-xs-12">
+		<h3>Reporte de articulos por debajo del punto de reorden</h3>
+		<br>
+		<p>Este reporte indica los articulos cuya existencia se encuentra bajo el punto de reorden. El punto de reorden establecido en esta aplicacion de Inventario es de 100. Cualquier articulo que tenga existencia de menos de 100 aparecera en este reporte como acuse de que se debe realizar una orden para dicho articulo.</p>
+		<button class="btn btn-primary" ng-model="reordenar" ng-click="genReOrden()">Generar Reporte</button>
+	</div>
+	<div class="col-xs-12">
+		<h3>Reporte de transacciones</h3>
+		<br>
+		<p>Este reporte indica las transacciones realizadas en la aplicacion. Las transaccoines pueden ser de Entrada y de Salida</p>
+		<button class="btn btn-primary" ng-model="transac" ng-click="genTransacciones()">Generar Reporte</button>
+	</div>
+	<div class="col-xs-12">
+		<h3>Reporte de existencia por almacen</h3>
+		<br>
+		<p>Este reporte indica la existencia de cada articulo en un almacen. Los articulos estaran ordenados por nombre.</p>
+		<button class="btn btn-primary" ng-model="exist" ng-click="genExistencia()">Generar Reporte</button>
+	</div>
+</div>

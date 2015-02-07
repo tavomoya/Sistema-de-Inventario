@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>You Shall Twitt here</h2>
+
+  <!--Making the tweets -->
+  <form role="form">
+    <div class="row">
+      <input type="text" ng-model='author' placeholder="Who r u?" class="form-control" disabled>
+      <div class="input-group">
+        <p></p>
+        <textarea rows='4', cols="130" ng-model='tweet' placeholder='What u thinking?' class='form-control' maxlength="200" required>   
+        </textarea>
+      </div>
+    </br>
+      <span class="input-group-btn">
+          <button class='btn btn-primary' ng-click='addTweet()'>Tweet!</button>
+      </span>
+    </div>
+  </form>
+  <p></p>
+  
+    <p class="input-group" ng-repeat="tweet in tweets | orderBy: 'date': true">
+        <label class='glyphicon glyphicon-user' style='font-size:20px;font-weight:bold'><a ng-click='viewProfile(tweet.author)'>@{{tweet.author}}</a></label> </br>
+        <span style="color:#2c3e50; font-weight:bolder" class='glyphicon glyphicon-comment'>{{tweet.message}}</span></br>
+        <span class='glyphicon glyphicon-calendar'>{{tweet.date}}</span>
+      <span class="input-group-btn">
+        <button type="button" class="close" ng-click='removeTweet(tweet._id)' ><span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </span>
+    </p>
+</div>
+

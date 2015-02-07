@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: soap-client.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: soap-client.js</h1>
+
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+* @author Carlos Gonzalez &lt;cgonzalez@simetricaconsulting.com>
+* @copyright 2014 Simetrica Consulting. Todos los derechos reservados.
+*/
+/**
+* @namespace nodejs
+*/
+/**
+* @class nodejs.soapClient
+* @memberOf nodejs    
+* @param {object} usr - Usuario con datos de email y password para conectarse al servidor de WS
+*/
+var soap = require('soap')
+  , validator = require('validator')
+  , tokenws = null
+  , ws_url = null
+  , usr = { email: 'medicoswebapp@pss.com.do', password: 'YXJzc2RzNDMyMQ=='};
+/**
+* @function init
+* @memberOf nodejs.soapClient
+* @param {string} wsurl - URL del webservice.
+* @description Funcion que inicializa la conexion con el webservice.
+*/	
+exports.init = function init(wsurl){
+  ws_url = wsurl;
+}
+
+function callback(res){
+  return function(err, result){
+    if (err){
+		if(res != undefined)
+			res.json({err: err});
+    }
+    else{
+      if (result.LoginResult){
+        console.log('[*] LOGIN SIMETRICA RESULT: ' + result.LoginResult.Token);
+        tokenws = result.LoginResult.Token;
+      }
+	  if(res != undefined)
+		res.json({res: result});
+    }
+  }
+}
+
+function consume(method, params){
+  return function(req, res){
+    soap.createClient(ws_url, function(err, client) {
+        if (client){
+          client[method](params, callback(res));
+        }
+        else{
+          res.json({ err: 'ERR_WS_SIMETRICA_NO_AVAILABLE'});
+        }
+    });
+  };
+}
+
+function customConsume(method, param, fn){
+    soap.createClient(ws_url, function(err, client) {
+      if (client){
+        client[method](param, fn);
+      }
+      else{
+          fn('ERR_WS_SIMETRICA_NO_AVAILABLE',null);
+      }
+    });
+ }
+
+function checkToken(callback){
+  customConsume('ValidaToken', { token: tokenws}, callback);
+}
+
+function CheckTokenAndConsume(method, param){
+  return function(req,res){
+    checkToken(function(err, result){
+        if (err || !result.ValidaTokenResult){
+          if (err){
+            console.log('[-] ValidaToken Error: ' + err);
+          }
+          else if (!result.ValidaTokenResult){
+            console.log('[-] Simetrica Token Expired');
+            console.log('[*] Simetrica New Token ');
+          }
+          customConsume('Login', usr, function(err2, result2){
+              if (err2){
+                res.json({ err: err2});
+              }
+              else{
+                param.token = result2.LoginResult.Token;
+                consume(method, param)(req,res);
+              }
+          });
+        }
+        else{
+          param.token = tokenws;
+          if ((req.body.debug != undefined) &amp;&amp; (req.body.debug == 1)){
+            param.debug = 1;
+            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            var agent = req.headers['user-agent'];
+            console.log('[*] Client: ' + ip + ' , Agent: ' + agent + '\n');
+            console.log('\n[*] Method: "' + method + '"');
+            console.log('[*] Param: ' + JSON.stringify(param));
+          }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            param.debug = 1;
+            var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+            var agent = req.headers['user-agent'];
+            console.log('[*] Client: ' + ip + ' , Agent: ' + agent + '\n');
+            console.log('\n[*] Method: "' + method + '"');
+            console.log('[*] Param: ' + JSON.stringify(param));
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          consume(method, param)(req, res);
+        }
+    });
+  }
+}
+
+/**
+* @function consume
+* @memberOf nodejs.soapClient
+* @description Funcion que consume el webservice.
+*/	
+exports.consume = customConsume;
+
+/**
+* @function Test
+* @memberOf nodejs.soapClient
+* @description Funcion que realiza el webservice Test.
+*/
+exports.Test = consume('Test', {});
+
+
+/**
+* @function LoginTest
+* @memberOf nodejs.soapClient
+* @param {object} usr - Datos del usuario 
+* @description Funcion que realiza el login al servidor de WS.
+*/
+exports.LoginTest = consume('Login', usr);
+
+/**
+* @function autoLogin
+* @memberOf nodejs.soapClient
+* @description Funcion que realiza el login de manera automatica al servidor de WS.
+*/
+exports.autoLogin = function(){
+  console.log('[*] AutoLogin Simetrica');
+  customConsume('Login', usr, function(err2, result){
+      if (err2){ 
+        console.log('[-] Error Login Simetrica: ' + err2);
+      }
+      else{
+        console.log('[*] Token app Simetrica: ' + result.LoginResult.Token);
+        tokenws = result.LoginResult.Token;
+      }
+  });
+}
+
+/**
+* @function Login
+* @memberOf nodejs.soapClient
+* @param {string} email - Datos del usuario 
+* @param {string} password - Datos del usuario 
+* @description Funcion que realiza el login al servidor de WS.
+*/
+exports.Login = function(email, password){
+
+  if (!validator.isEmail(email)){
+    throw new Error('email is null');
+  }
+  if (validator.isNull(password)){
+    throw new Error('password is null');
+  }
+  return consume('Login', {
+     email: email
+   , password: password
+  });
+}
+
+/**
+* @function ValidaToken
+* @memberOf nodejs.soapClient
+* @param {string} token - Token dado del WS
+* @description Funcion que valida el token que se tiene.
+*/
+exports.ValidaToken = function(token){
+  return consume('ValidaToken', { 
+    token: token
+  });
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Index</a></h2><h3>Classes</h3><ul><li><a href="angular.symdevsApp.html">symdevsApp</a></li><li><a href="angular.symdevsApp.AlertCtrl.html">AlertCtrl</a></li><li><a href="angular.symdevsApp.ModalCtrl.html">ModalCtrl</a></li><li><a href="angular.symdevsApp.SessionCtrl.html">SessionCtrl</a></li><li><a href="angular.symdevsApp.SessionCtrl.objectCRUD.html">objectCRUD</a></li><li><a href="nodejs.soapClient.html">soapClient</a></li></ul><h3>Namespaces</h3><ul><li><a href="angular.html">angular</a></li><li><a href="nodejs.html">nodejs</a></li></ul>
+</nav>
+
+<br clear="both">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Wed Aug 13 2014 20:10:30 GMT-0400 (Hora estándar oeste, Sudamérica)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

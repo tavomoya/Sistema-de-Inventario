@@ -1,0 +1,1171 @@
+/* CSS Imports */
+
+@import url(bootstrap.css);
+@import url(../bower_components/ng-grid/ng-grid.css);
+@import url(../bower_components/fullcalendar-2.1.0/fullcalendar.css);
+/* Styles */
+
+body {
+  font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;
+  padding-top: 33px;
+}
+
+footer {
+ 
+  padding: 10px;
+  border-top: 1px solid #cecece;
+  text-align: center;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: 'Raleway', Tahoma, Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  cursor: default;
+}
+
+/* HR sin marging top/bottom*/
+hr.hr-margin{
+margin-top: 7px;
+margin-bottom: 7px;
+}
+
+h1,h2,h3,h4,h5,h6.no-margin-bottom{
+margin-bottom: 0px;
+}
+
+/* Alineacion de Elementos */
+
+.center-element{
+text-align: center;
+}
+
+.a-right{
+float: right;
+} 
+
+
+/* Estilos para los enlaces */
+
+.links { 
+    text-decoration: none;
+}
+
+.links:hover
+{
+  text-decoration: none;
+}
+.links:focus 
+{
+  text-decoration: none;  
+}
+
+/*
+		*Estilos para las tablas
+*/
+
+/*tabla sin margin-botto*/
+table.table-margin-bottom{
+   margin-bottom: 0px;
+}
+
+td.vista360img{
+ height: 34px;
+ width: 44px;
+}
+/* columna separadora de tabla */
+.col-separadora {
+   width: 5%;
+}
+
+/* No Margin-bottom table */
+.no-margin-bottom > .panel > .panel-body > .table[table, table-condensed, table-]{
+  margin-bottom: 0px;
+}
+table.no-margin-bottom{
+  margin-bottom: 0px;
+}
+.no-margin-bottom{
+	margin-bottom: 0px;
+}
+.no-border-top > thead > tr > th, .no-border-top > tbody > tr > th, .no-border-top > tfoot > tr > th, .no-border-top > thead > tr > td, .no-border-top > tbody > tr > td, .no-border-top > tfoot > tr > td{
+border-top: 0px;
+
+}
+
+table.no-border-bottom{
+ border-bottom: 0px;
+}
+
+
+> .panel-body > .table > tr > th{    
+margin-bottom: 100px;
+}
+
+/*
+		*Reusables styles
+*/
+
+
+/* Espacio Divisor*/
+.divider{
+margin-left: 11px;
+}
+.p-right{
+padding-right: 0px;
+
+}
+.p-left{
+padding: 0px;
+}
+
+.checkbox_margin_bottom{
+margin-bottom: 12px;
+}
+
+.img-columnas{
+padding: 0px 8px;
+}
+
+/* Special-grid-no-*/
+.Column-no-width{
+  width: 0px;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;  
+}
+
+.espace
+{    
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+}
+
+
+
+/*
+ 	* no paddng/margin
+ */
+.nopadding {
+margin-top: 0px;
+}
+
+/*
+ * padding-bottom
+ */
+.space-lines {
+padding-bottom: 1px;
+}
+
+/* ipad Mini Portrait */
+@media only screen and (width:768px) and (resolution: 163dppx) {
+   
+}
+/* ipad Mini Landscape */
+@media only screen and (width:1024px) and (resolution: 163dppx) {
+	
+ .sidebar {
+    display: none !important;
+  } 
+}
+.sidebar > .nav > li > a:hover, .sidebar > .nav > li > a:focus {
+  background-color: #fff;
+  color: #333;
+}
+.navSmall>li {
+  float: left !important;
+}
+.navSmall {
+  margin: 0;
+  padding: 0;
+}
+.navSmall > li > a {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+.nav > li > a:hover, .nav > li > a:focus {
+text-decoration: none;
+background-color: #FFF;
+color: #000000;
+}
+
+.sidebar > ul > li > a.nav-sidebar-link{
+border-bottom: solid 1px;
+border-color: #535050;
+}
+
+.nav-sidebar-sub > li > a{
+padding-left: 25px;
+color: #d0d0d0;
+font-size: 13px;
+}
+.nav-sidebar-sub > li > a:hover{
+background-color: #F5F5F5;
+}
+
+.headerName {
+  font-size: 2.35vmax;
+}
+.table-hover>tbody>tr:hover>td {
+  background-color: #428bca;
+  color: #fff;
+}
+.disabledAnchor {
+  pointer-events: none;
+  cursor: default;
+}
+.paginationCRM {
+  margin: 0 auto 20px;
+  width: 140px;
+  display: table;
+}
+.paginationCRM > li > a {
+  cursor: pointer;
+  cursor: -webkit-grab;
+}
+.table-condensed {
+  padding: 3px;
+  font-size: 0.83em;
+}
+.highcharts-title {
+  font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;
+}
+.logoNav {
+  margin-top: 4px;
+  width: 23px;
+  margin-right: 5px;
+}
+.navbar-brand {
+  color: #333;
+  height: 32px;
+  line-height: 2px;
+  font-family: 'Raleway', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+}
+.navbar-brand:hover {
+  color: #888;
+}
+.page-header {
+  margin: 0 0 20px 0;
+}
+.metriCube {
+  margin-bottom: 20px;
+  min-height: 80px;
+  color: #fff;
+  position: relative;
+}
+.metriCube h4 {
+  font-size: 1.45vmax;
+}
+.metriCube h2 {
+  font-weight: bold;
+}
+.metriCube:before {
+  font-family: 'FontAwesome', sans-serif;
+  color: #fff;
+  font-size: 9em;
+  position: absolute;
+  bottom: -62px;
+  right: 5px;
+  opacity: 0.4;
+}
+.mcRed {
+  background-color: #ff7e66;
+}
+.mcRed:before {
+  content: "\f007";
+}
+.mcSkyBlue {
+  background-color: #7dcefd;
+}
+.mcSkyBlue:before {
+  content: "\f095";
+}
+.mcYellow {
+  background-color: #fec97b;
+}
+.mcYellow:before {
+  content: "\f021";
+}
+.mcOceanBlue {
+  background-color: #1f85c5;
+}
+.mcOceanBlue:before {
+  content: "\f016";
+}
+.headerProfile {
+  background-color: #1f85c5;
+  font-weight: bold;
+  color: #fff;
+}
+/*
+ * Navbar
+ */
+.navbar {
+  min-height: 31px;
+  background-color: #f8f8f8;
+  border-bottom-color: #e7e7e7;
+}
+
+/*
+ * Sidebar
+ */
+.sidebar {
+  position: fixed;
+  top: 33px;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  display: block;
+  padding: 0px 0px 20px 20px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #3d3d3d;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: 0px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: #d0d0d0;
+}
+.nav-sidebar > .active > a {
+  color: #333;
+  background-color: #fff;
+}
+
+.nav-sidebar-sub > li.active > a{
+  color: #333;
+  background-color: #fff;
+}
+
+/*
+ * Progress bar
+ */
+.pace-progress {
+  margin: 0;
+  padding: 0;
+  height: 5px;
+  background-color: #1f85c5;
+  border-radius: 0px;
+  z-index: 1000;
+  position: fixed;
+  top: 33px;
+}
+
+
+.ng-enter {
+  -webkit-transition: 1s;
+  transition: 1s;
+  
+  opacity: 0;
+}
+
+.ng-enter-active {
+  opacity: 1;
+}
+
+.ng-leave {
+  -webkit-transition: 1s;
+  transition: 1s;
+  
+  opacity: 0;
+}
+
+.ng-leave-active {
+  opacity: 1;
+}
+
+.animate-hide {
+  -webkit-transition:all linear 0.5s;
+  transition:all linear 0.5s;
+  line-height:20px;
+  opacity:1;
+  padding:10px;
+  border:1px solid black;
+  background:white;
+}
+ 
+.animate-hide.ng-hide-add,
+.animate-hide.ng-hide-remove {
+  display:block!important;
+}
+ 
+.animate-hide.ng-hide {
+  line-height:0;
+  opacity:0;
+  padding:0 10px;
+}
+
+.glow {
+    /*margin: 20px;*/
+    margin-right:5px;
+    -webkit-box-shadow: 1px 1px 30px 1px #fff;
+    box-shadow: 1px 1px 30px 1px #fff;
+    animation: blink 1s steps(5, start) infinite;
+    -webkit-animation: blink 1s steps(5, start) infinite;
+}
+@keyframes glow {
+  to { visibility: hidden; }
+}
+@-webkit-keyframes glow {
+  to { visibility: hidden; }
+}
+
+.pointer{
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+/* Estilos para el ui-tree */
+.angular-ui-tree-handle {
+    background: #f8faff;
+    border: 1px solid #dae2ea;
+    color: #7c9eb2;
+    padding: 10px 10px;
+}
+
+.angular-ui-tree-handle:hover {
+    color: #438eb9;
+    background: #f4f6f7;
+    border-color: #dce2e8;
+}
+
+.angular-ui-tree-placeholder {
+    background: #f0f9ff;
+    border: 2px dashed #bed2db;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+.group-title {
+    background-color: #687074 !important;
+    color: #FFF !important;
+}
+
+/*
+  Estilos para el Wizard
+*/
+.wizard {
+  position: relative;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+  *zoom: 1;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+     -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+.wizard:before,
+.wizard:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+.wizard:after {
+  clear: both;
+}
+.wizard ul {
+  width: 4000px;
+  padding: 0;
+  margin: 0;
+  list-style: none outside none;
+}
+.wizard ul.previous-disabled li.complete {
+  cursor: default;
+}
+.wizard ul.previous-disabled li.complete:hover {
+  color: #468847;
+  cursor: default;
+  background: #f3f4f5;
+}
+.wizard ul.previous-disabled li.complete:hover .chevron:before {
+  border-left-color: #f3f4f5;
+}
+.wizard ul li {
+  position: relative;
+  float: left;
+  height: 46px;
+  padding: 0 20px 0 10px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 46px;
+  color: #999999;
+  cursor: default;
+  background: #ededed;
+}
+.wizard ul li .chevron {
+  position: absolute;
+  top: 0;
+  right: -14px;
+  z-index: 1;
+  display: block;
+  border: 24px solid transparent;
+  border-right: 0;
+  border-left: 14px solid #d4d4d4;
+}
+.wizard ul li .chevron:before {
+  position: absolute;
+  top: -24px;
+  right: 1px;
+  display: block;
+  border: 24px solid transparent;
+  border-right: 0;
+  border-left: 14px solid #ededed;
+  content: "";
+}
+.wizard ul li.complete {
+  color: #468847;
+  background: #f3f4f5;
+}
+.wizard ul li.complete:hover {
+  cursor: pointer;
+  background: #e7eff8;
+}
+.wizard ul li.complete:hover .chevron:before {
+  border-left: 14px solid #e7eff8;
+}
+.wizard ul li.complete .chevron:before {
+  border-left: 14px solid #f3f4f5;
+}
+.wizard ul li.active {
+  color: #3a87ad;
+  background: #f1f6fc;
+}
+.wizard ul li .badge {
+  margin-left: 10px;
+}
+.wizard ul li.active .badge {
+  background-color: #1f85c5;
+  margin-left: 0;
+}
+.wizard ul li.active .chevron:before {
+  border-left: 14px solid #f1f6fc;
+}
+.wizard ul li .badge {
+  margin-right: 8px;
+}
+.wizard ul li:first-child {
+  padding-left: 20px;
+  border-radius: 4px 0 0 4px;
+}
+.wizard .actions {
+  position: absolute;
+  right: 0;
+  z-index: 1000;
+  float: right;
+  padding-right: 15px;
+  padding-left: 15px;
+  line-height: 46px;
+  vertical-align: middle;
+  background-color: #e5e5e5;
+  border-left: 1px solid #d4d4d4;
+}
+.wizard .actions a {
+  margin-right: 8px;
+  font-size: 12px;
+  line-height: 45px;
+}
+.wizard .actions .btn-prev i {
+  margin-right: 5px;
+}
+.wizard .actions .btn-next i {
+  margin-left: 5px;
+}
+.step-content {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #D4D4D4;
+  border-top: 0;
+  border-radius: 0 0 4px 4px;
+}
+.step-content .step-pane {
+  display: none;
+}
+.step-content .active {
+  display: block;
+}
+.step-content .active .btn-group .active {
+  display: inline-block;
+}
+
+/*
+  Angular Text Area
+*/
+
+.ta-toolbar {
+  background-color: rgb(240, 240, 240);
+  padding: 4px;
+  margin: 0;
+  border-radius: 4px 4px 0px 0px;
+  border: 1px solid #cecece;
+  border-bottom: medium none;
+}
+.ng-isolate-scope.ng-valid.ta-bind.ng-dirty {
+  border-radius: 0px 0px 4px 4px;
+}
+
+/*
+  ng-Grid area (para los modales)
+*/
+.red {
+	background-color: #FF4545;
+	
+}
+.ng-cloak{
+	display:none
+}
+
+.gridStyle {
+  
+    width: 525px; 
+    height: 350px;
+    margin-left: auto;
+    margin-right: auto;
+} 
+
+.gridInput {
+    width: 525px; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+
+.modal { 
+	display: block;
+}
+.modal-footer {
+  margin-top: 0px;
+}
+.alert{
+
+  margin-bottom: 0px;
+}
+
+.ngRow.odd {
+  background-color: #ffffff;
+}
+
+.ngVerticalBarVisible {
+  width: 0px;
+}
+
+.ngHeaderContainer {
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.ngTopPanel {
+  position: relative;
+  z-index: 1;
+  background-color: #ffffff;
+  border-bottom: 1px solid #d4d4d4;
+  border-top: 1px solid #d4d4d4;
+}
+
+.ngGrid {
+  background-color: #ffffff;
+}
+
+.ngRow.even {
+  background-color: #ffffff;
+}
+
+.ngRow {
+  position: absolute;
+  border-top: 1px solid #d4d4d4;
+  border-bottom: 1px solid #d4d4d4;
+}
+.ngRow:first-child {
+border-top: medium none;
+}
+
+.ngRow:hover {
+  background-color: #7bb1e4;
+  color: #ffffff;
+}
+
+.ngRow.selected {
+  background-color: #c9dde1;
+}
+.ngHeaderText {
+  padding: 5px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  white-space: nowrap;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+  color: inherit;
+  }
+
+/*
+  ng-Grid area (para las tablas)
+*/
+
+.gridStyle-tables {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.gridInput-tables {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+.ngHeaderContainer-tables{
+  position: relative;
+  z-index: 1;
+  background-color: purple;
+  border-bottom: 1px solid #d4d4d4;
+  border-top: 1px solid #d4d4d4;
+}
+
+div.blue-top-panel{
+background-color: #1f85c5;
+color: #ffffff;
+}
+
+div.pink-top-panel{
+  background-color: #e78e7c;
+  color: #ffffff;
+}
+
+div.yellow-top-panel{
+  background-color: #fdc97d;
+  color: #ffffff;
+}
+
+div.lightblue-top-panel{
+  background-color: #7ccefe;
+  color: #ffffff;
+}
+
+.gridStyleBlue .ngTopPanel {
+  background-color: #1f85c5;
+  color: #ffffff;
+  border: medium none;
+}
+.gridStylePink .ngTopPanel {
+  background-color: #e78e7c;
+  color: #ffffff;
+  border: medium none;
+}
+.gridStyleYellow .ngTopPanel {
+  background-color: #fdc97d;
+  color: #ffffff;
+  border: medium none;
+}
+
+.gridStyleLightBlue .ngTopPanel {
+ background-color:  #7ccefe;
+  color: #ffffff;
+  border: medium none;
+}
+
+.gridMarginp.panel-heading{
+padding: 1px 1px;
+  
+}
+
+.gridBorder .ngCanvas, .panel{
+border-bottom: solid 1px;
+/*border-right: solid 1px;*/
+border-color: #dcdcdc;
+width: 100%;
+}
+
+.ocultar{
+display: none;
+
+}
+
+.reajustar-height-1{
+	
+height: 62px;
+width: 100%;
+}
+
+.reajustar-height-2{
+height: 93px;
+width: 100%;
+}
+
+.reajustar-height-3{
+height: 123px;
+width: 100%;
+}
+.reajustar-height-4{
+height: 151px;
+}
+
+.ngRow-striped .ngRow:nth-child(odd){
+  background-color: #f9f9f9;
+}
+.ngRow-striped .ngRow:hover{
+  background-color: none;
+  color: none;
+}
+
+.ngRow-striped .ngRow:nth-child(odd):hover{
+    background-color: #7bb1e4;
+    color: #ffffff;
+}
+.ngResolution .ngRow,.ngCanvas{
+
+width: 100% !important;
+border-bottom: 0px;
+}
+span.panel-badge {
+background-color: rgba(122, 111, 111, 0.14);
+
+}
+
+/*
+  Full Calendar 2.1.0
+*/
+
+/* toolbar text */
+
+.fc-toolbar h2 {
+ padding-top: 12px;
+ font-weight: normal;
+ font-family: 'Raleway', Tahoma, Helvetica, Arial, sans-serif;
+ text-align: center;
+
+}
+
+div.fc-toolbar{
+text-align: center;
+margin-bottom:0px;
+background-color: #F9F9F9;
+}
+/* FullCalendar Tables */
+
+.fc table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 1em; /* normalize cross-browser */
+}
+
+.fc th {
+  text-align: center;
+  color: #1f85c5;
+  text-transform: capitalize;
+  border-style:none;
+  border-width: 0px;
+  padding: 0;
+  vertical-align: top;
+}
+
+
+.fc td.fc-today {
+	border-style: double; /* overcome neighboring borders */
+}
+
+.fc-ltr .fc-axis {
+	text-align: right;
+    color: #1f85c5;
+    
+}
+
+.fc-mon, .fc-wed, .fc-fri{
+  background-color: #f9f9f9;
+}
+
+
+  .fc-highlight { /* when user is selecting cells */
+	background: #1F94D5;
+
+}
+
+/* Color para el dia actual(calendario-mensual)*/
+ div.fc-bg > table > tbody > tr > td.fc-day.fc-widget-content.fc-today {
+	background-color: #ffefdb;
+}
+
+.fc-agendaDay-view div.fc-bg > table > tbody > tr > td.fc-day.fc-widget-content.fc-today {
+    background-color: #fff;
+}
+ div.fc-view-container > div > table > thead > tr > td > div > table > thead > tr > th.fc-axis.fc-widget-header{
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    padding-bottom: 3px;
+}
+
+/* FullCalendar Buttons Groups
+--------------------------------------------------------------------------------------------------*/
+div.fc-toolbar > div.fc-right > div > button, div.fc-toolbar > div.fc-right > button{
+  
+background-color: #ffffff;
+background-image: none;
+background-repeat: none;
+border-color: #ccc;
+color: #333;
+text-shadow: none;
+box-shadow: none;  
+display: inline-block;
+padding: 6px 12px;
+margin-bottom: 0;
+font-size: 14px;
+font-weight: 400;
+line-height: 1.42857143;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+  
+}
+
+.fc-state-default {
+color: #333;
+background-color: #ffffff;
+border-color: #ccc;
+}
+
+div.fc-toolbar > div.fc-right > div > button:hover, div.fc-toolbar > div.fc-right > button:hover, div.fc-toolbar > div.fc-right > div > button:focus,div.fc-toolbar > div.fc-right > button:focus, div.fc-toolbar > div.fc-right > div > button:active, div.fc-toolbar > div.fc-right > button:active{
+color: #333;
+background-color: #e6e6e6;
+}
+
+div.fc-toolbar > div.fc-right > button.fc-state-disabled{
+background-color: #e6e6e6;
+
+}
+
+.fc-button-group {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: 16px;
+}
+.fc-button-group :hover,
+.fc-button-group :focus,
+.fc-button-group :focus,
+.fc-button-group :active{
+  z-index: 2;
+}
+.fc-button-group:focus {
+  outline: none;
+}
+
+/*
+every button that is not first in a button group should scootch over one pixel and cover the
+previous button's border...
+*/
+
+.fc .fc-button-group > * { /* extra precedence b/c buttons have margin set to zero */
+	float: left;
+	margin: 0 0 0 -1px;
+    position: relative;
+}
+
+.fc .fc-button-group > :first-child { /* same */
+	margin-left: 0;
+}
+
+ div.fc-toolbar > div.fc-left > button{
+  width: 50px;
+  height: 60px;
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: #fe7c66;
+  border-color: #adadad;
+  background-image: none;
+  border-color: #F0745B;
+ }
+
+div.fc-toolbar > div.fc-right > button.fc-next-button{
+ width: 50px;
+  height: 60px;
+  border-radius: 0px;
+  color: #ffffff;
+  background-color: #fe7c66;
+  border-color: #adadad;
+  background-image: none;
+  border-color: #F0745B;
+ }
+
+/* icons in buttons */
+
+.fc button .fc-icon { /* non-theme */
+	position: relative;
+	top: .05em; /* seems to be a good adjustment across browsers */
+	margin: 0 .1em;
+}
+
+.fc-month-view .fc-widget-header:first-child {
+  border: medium none;
+}
+.fc-row th.fc-day-header {
+  border: medium none;
+  background-color: #ffffff;
+  
+}
+
+div.fc-event-container > a.pendiente, a.pendiente {
+ background-color: #fdc97d;
+	border: solid 1px;
+border-color: #EBBC6A;
+
+}
+
+div.fc-event-container > a.realizada, a.realizada {
+ background-color: #7CCEFE;
+	border-color: #6AA4C1;
+	border: solid 1px;
+}
+
+
+div.fc-toolbar > div.fc-right > button.fc-today-button.fc-button{
+margin-top: 16px;
+}
+
+div.fc-view-container > div > table > thead > tr > td > div{
+margin-bottom: 10px;
+}
+
+/* Clases para los mantenimientos*/
+
+tr.mantenimiento-header{ 
+background-color: #1f85c5;
+color: #ffffff;
+}
+tr.mantenimiento-subHeader{ 
+background-color: 	#308ec9;
+color: #ffffff;
+}
+
+div.popover-content {
+color: #3d3d3d;
+
+}
+
+table.bordes-mant{
+border-collapse: inherit;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > th {
+background-color: inherit;
+}
+
+/* Nuevo RadioButton de CRM */
+
+.radioCrm {
+	width: 70px;
+	height: 26px;
+	background: rgba(51, 51, 51, 0.32);;
+	margin: 0px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.radioCrm:after {
+	content: 'NO';
+	font: 12px/26px Arial, sans-serif;
+	color: #ffffff;
+	position: absolute;
+	right: 10px;
+	z-index: 0;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+}
+
+.radioCrm:before {
+	content: 'SI';
+	font: 12px/26px Arial, sans-serif;
+	color: #ffffff;
+	position: absolute;
+	left: 10px;
+	z-index: 0;
+	font-weight: bold;
+}
+
+.radioCrm label {
+	display: block;
+	width: 34px;
+	height: 20px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	-webkit-transition: all .4s ease;
+	-moz-transition: all .4s ease;
+	-o-transition: all .4s ease;
+	-ms-transition: all .4s ease;
+	transition: all .4s ease;
+	cursor: pointer;
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	z-index: 1;
+
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+.radioCrm input[type=checkbox]:checked + label {
+	left: 33px;
+	
+}
+
+input.check-hide{
+	display: none;
+}
+
+
